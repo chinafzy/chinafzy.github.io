@@ -1,4 +1,4 @@
 ---
 title: "simple categories"
-categories: cat1
+categories: cat1 tips
 ---
