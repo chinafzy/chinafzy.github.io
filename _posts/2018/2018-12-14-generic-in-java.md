@@ -2,6 +2,7 @@
 title:  "Java中的泛型"
 date:   2018-12-14 17:08:11 +0800
 tags: Java Program
+categories: java
 ---
 
 ## 前言
