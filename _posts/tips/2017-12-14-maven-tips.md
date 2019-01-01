@@ -2,7 +2,7 @@
 title:  "Maven Tips"
 date:   2018-12-19 07:08:11 +0800
 categories: tips maven
-tags: maven tips
+tags: Maven Tips
 ---
 
 ## Plugin execution not covered by lifecycle configuration: org.codehaus.gmaven:groovy-maven-plugin:2.0:execute in eclipse
