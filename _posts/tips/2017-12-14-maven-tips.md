@@ -1,7 +1,7 @@
 ---
 title:  "Maven Tips"
 date:   2018-12-19 07:08:11 +0800
-categories: tips maven
+categories: maven tips
 tags: Maven Tips
 ---
 
