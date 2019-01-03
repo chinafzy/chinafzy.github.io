@@ -1,5 +1,5 @@
 ---
-title: "Learn Redies"
+title: "Learn Redis"
 tags: Learn Redis
 categories: redis learn
 ---
