@@ -5,6 +5,8 @@ categories: redis tips
 tags: Redis Tips
 ---
 
+## Redis的推荐配置
+
 
 ## url for jedis config
 ``` yml

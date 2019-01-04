@@ -104,7 +104,7 @@ analytics:
 # Site Author
 author:
   name             : "fzy"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/img/mny.jpg"
   bio              : "资深宅男，专业程序员."
   location         : "BJ"
   email            : 19781971@qq.com
@@ -123,7 +123,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/chinafzy"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"

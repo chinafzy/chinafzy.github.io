@@ -40,7 +40,6 @@ jtop(){
     sed -n "/$gtext/,/\"/p" $tfile | head -n -2
   done
 }
-
 ```
 
 案例：
