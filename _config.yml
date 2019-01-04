@@ -16,16 +16,16 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "zh-CN"
-title                    : "程序员杂货铺"
+title                    : "Java杂货铺"
 title_separator          : "-"
 name                     : "fzy"
 description              : "写点什么吧."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : chinafzy/chinafzy.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+words_per_minute         : 50
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
@@ -107,7 +107,7 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "资深宅男，专业程序员."
   location         : "BJ"
-  email            :
+  email            : 19781971@qq.com
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -206,6 +206,11 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
 
 
 # Sass/SCSS

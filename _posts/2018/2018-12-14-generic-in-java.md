@@ -34,16 +34,16 @@ public static <T> void copy (List<? super T> dest, List<? extends T> src) {
     }
 }
 ```
-+ src列表，在函数体内，只用来提供（“生产”）元素给别人使用。因此，它需要关注的是，自己提供的元素，不能超过一个类型范围。也就是说，需要限定自己的类型的上限（upper bound）。<? extends T>就约定了，每个元素是T或它的子孙类型，不超出生产的需求；
-+ 而dest列表，在函数体内，只用来接受（“消费”）元素。这个列表，必须要“至少”允许T可以加入到列表中，也就是说，这个列表的元素类型的下限（lower bound）是T。<? super T>就约定了，这个列表“至少”允许加入T。
++ src列表，在函数体内，只用来提供元素给别人使用，它是生产者。它需要关注的是，自己提供的元素，不能超过一个类型范围。也就是说，需要限定自己的类型的上限（upper bound）。<? extends T>就约定了，每个元素是T或它的子孙类型，不超出生产的需求；
++ 而dest列表，在函数体内，只用来接受元素，它是消费者。这个列表，必须要“至少”允许T可以加入到列表中，也就是说，这个列表的元素类型的下限（lower bound）是T。<? super T>就约定了，这个列表“至少”允许加入T。
 
 Effective In Java总结为PECS（ProducerExtends ConsumerSuper）。
-- 生产者，要求upper bound，即extends
-- 消费者，要求lower bound，即super
+- 生产者：要求upper bound，即extends
+- 消费者：要求lower bound，即super
 
 如果代码同时对这个列表有读和写的行为，也就是说这个列表同时作为生产者和消费者，那自然就是super和extends都不选择，直接List\<T>。
 
-**小结：从列表自身的角度来看，PECS。**
+**小结：从生产消费者的角度来看，PECS。**
 
 如果不能理解，再尝试俩次，如果还不能理解，继续看下面的sample。
 
@@ -128,4 +128,4 @@ Object o = unknowns.get(0);
 
 
 ## 总结
-其实前面的四个小节都是在重复一个道理。PECS的原因。
+其实前面的四个小节都是在重复一个道理：PECS的原因。
