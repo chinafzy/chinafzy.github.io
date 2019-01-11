@@ -33,7 +33,6 @@ tags: Maven Tips
 </plugin>
 ```
 
-```
 add node of action
 ```xml
 <action>

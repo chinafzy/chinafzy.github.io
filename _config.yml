@@ -212,7 +212,6 @@ kramdown:
       line_numbers: true
 
 
-
 # Sass/SCSS
 sass:
   sass_dir: _sass
@@ -235,6 +234,7 @@ plugins:
   - jemoji
   - jekyll-include-cache
   - jekyll-mermaid
+  # - jekyll-target-blank
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -244,6 +244,8 @@ whitelist:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+  - jekyll-mermaid
+  # - jekyll-target-blank
 
 mermaid:
   src: '/assets/js/mermaid.min.js'

@@ -7,6 +7,13 @@ tags: Redis Tips
 
 ## Redis的推荐配置
 
+### tcp-keepalive 
+这个参数是性能的关键，在早期版本中，参数是默认关闭的。
+设置为180是比较合理的。
+
+### timeout
+
+
 
 ## url for jedis config
 ``` yml

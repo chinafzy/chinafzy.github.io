@@ -1,7 +1,7 @@
 ---
 title: "在nginx/openresty中利用变量进行转发分片"
 categories: nginx
-tags: Nginx Openresty
+tags: Nginx
 ---
 
 ## 应用场景 
@@ -21,6 +21,7 @@ server {
 
     location / {
         content_by_lua_block {
+            ngx.header['Content-Type'] = 'text/html'
             ngx.say(85 .. ' ' .. ngx.var.uri)
         }
     }
@@ -31,6 +32,7 @@ server {
 
     location / {
         content_by_lua_block {
+            ngx.header['Content-Type'] = 'text/html'
             ngx.say(86 .. ' ' .. ngx.var.uri)
         }
     }
@@ -50,6 +52,7 @@ server {
         set_by_lua_block $u_hash {
             return ngx.var.request_uri:match('^.*/')
         }
+
         proxy_pass http://u_x;
     }
 }
@@ -59,7 +62,7 @@ server {
 + 将配置范例加入到openresty的`conf/nginx.conf`文件中。
 + reload或重启openresty
 + 浏览器多次访问openresty的88端口，例如[http://localhost:88/](http://localhost:88/)，在path后面随意的加入内容，可以看见：
-  + 不同的请求不一定转发给同一个端口
+  + 不同的请求转发的端口可能不同
   + 相同的请求的转发端口永远是一个
 
 范例里面是根据请求的uri来做hash分片的。
@@ -73,7 +76,7 @@ server {
 ## 扩展开发
 上面的只是一个简单的范例，在这个思路上可以做几个实际的例子
 
-新的范例里面，我们只要修改`set_by_lua_block`这部分即可
+**注意：新的范例里面，我们只要修改`set_by_lua_block`这部分即可**
 
 ### 根据url参数中的cityId把用户分配到不同机器上 
 ```conf
@@ -82,25 +85,64 @@ set_by_lua_block $u_hash {
 }
 ```
 
-### `session sticky`
-`session stick` 的原理和流程是：
+### 根据用户来源IP来分配
+```conf
+set_by_lua_block $u_hash {
+    return ngx.var.remote_addr
+}
+```
 
-1 客户端发起请求
-1 nginx接受到请求
-1 nginx检查是否
+这个的效果等同于nginx的指令 [ip_hash](http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash)
+```conf
+upstream u_x {
+    ip_hash;
+
+    server localhost:85;
+    server localhost:86;
+}
+```
+
+### `session sticky`
+`session stick` 的原理是：
++ nginx会根据请求的分片cookie信息来计算分片，分发给后端的服务器，
++ 如果没有这个cookie，nginx生成一个。
+
+流程如下：
 
 {% mermaid %}
-sequenceDiagram
-    participant agent as Agent
-    participant nginx as Nginx
-    participant appsvr as AppServer
-    
-    agent->nginx: Request
-    
+graph TD
+    agent[客户端]
+    nginx[Nginx]
+    appsvr[应用服务器]
+    gen_cookie[生成分片Cookie]
+    dispatch[根据cookie计算分片]
+
+    agent-->|请求|nginx
+    nginx-->|检查分片Cookie|has_cookie{有分片Cookie}
+    has_cookie-->|N|gen_cookie
+    has_cookie-->|Y|dispatch
+    gen_cookie-->dispatch
+    dispatch-->|分发|appsvr
     
 {% endmermaid %}
 
+范例中用来做分片cookie的name是`ngshard`
+```conf
+set_by_lua_block $u_hash {
+    local v = ngx.var.cookie_ngshard;
+    if not v then 
+        v = ngx.now()
+        ngx.header['Set-Cookie'] = 'ngshard='.. v .. '; path=/'
+    end
 
+    return v
+}
+```
 
+用浏览器访问[http://localhost:88/](http://localhost:88/)，并且多次刷新，可以看到：
++ 访问一个固定的地址
++ http request中会增加一个cookie，类似于`ngshard=1546866932.493`
 
+如果将这个cookie清除，然后再次访问，可以看到:
++ nginx会重新返回一个新的cookie，此时可能会变动访问的后端服务器。
 

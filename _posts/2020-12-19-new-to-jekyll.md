@@ -8,7 +8,6 @@ categories: jekyll
 ### 使用Jekyll
 **我们需要用docker来运行，因为要保持简单的环境**
 
-
 #### clone项目到本机
 [https://github.com/chinafzy/chinafzy.github.io](https://github.com/chinafzy/chinafzy.github.io)
 
