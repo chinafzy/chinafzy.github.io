@@ -108,7 +108,7 @@ upstream u_x {
 + 如果没有这个cookie，nginx生成一个。
 
 流程如下：
-
+```
 {% mermaid %}
 graph TD
     agent[客户端]
@@ -125,7 +125,7 @@ graph TD
     dispatch-->|分发|appsvr
     
 {% endmermaid %}
-
+```
 范例中用来做分片cookie的name是`ngshard`
 ```conf
 set_by_lua_block $u_hash {
