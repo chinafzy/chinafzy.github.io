@@ -109,7 +109,6 @@ upstream u_x {
 
 流程如下：
 ```
-{% mermaid %}
 graph TD
     agent[客户端]
     nginx[Nginx]
@@ -124,7 +123,6 @@ graph TD
     gen_cookie-->dispatch
     dispatch-->|分发|appsvr
     
-{% endmermaid %}
 ```
 范例中用来做分片cookie的name是`ngshard`
 ```conf
