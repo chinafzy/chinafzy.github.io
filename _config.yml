@@ -244,7 +244,7 @@ whitelist:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
-  - jekyll-mermaid
+  # - jekyll-mermaid
   # - jekyll-target-blank
 
 mermaid:
