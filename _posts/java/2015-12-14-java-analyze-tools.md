@@ -2,7 +2,6 @@
 title: "非常有用的Java在线故障分析工具"
 tags: Java Analyze FAV
 categories: java
-date:   2015-12-14 00:00:00 +0800
 ---
 
 在故障分析过程中，积累了一些经验，整理了几个非常有用的工具。

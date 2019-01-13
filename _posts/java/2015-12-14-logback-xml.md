@@ -4,7 +4,19 @@ categories: java
 tags: Java
 ---
 
-## logback.xml
+## logback.xml推荐配置
+这里是个人使用的logback配置。
++ logpath：设置日志文件的存储路径 
++ patt_*：日志的格式
+  + patt_debug：开发调试环境下使用，它最大的优势是在eclipse的控制台上打印出来的日志，有明显的代码行号跳转链接，鼠标点击后可以直接跳到代码位置。
+  + patt_pro：生产环境配置，也带有【代码运行位置】。  
+  注意，【代码运行位置】特性会带来性能上的损耗，在高并发下这个影响比较明显。但是一般人都不会遇到很多高并发，一般建议加上，因为对于排查问题很有用。
+  + patt_fast：生产环境配置的高速版，去除了【代码运行位置】
+  + patt_simple：只打印消息本身，适用于做记录业务信息。
++ append建议开启sync模式，一般是有益无害。
++ 在刚接手项目时候，一定要把Spring的`RequestMappingHandlerMapping`和`AutoConfigurationReportLoggingInitializer`的日志打开，这里坑巨多。  
+如果用了数据库，也最好把Spring的数据库事务日志打开，因为你不知道别人会怎么配置的。
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="logback.xsd">
@@ -57,10 +69,6 @@ tags: Java
     <appender-ref ref="root_file" />
   </appender>
 
-  <!-- <logger name="com.yg84.pubmsg" additivity="true" level="INFO">
-    </logger>
-  -->
-
   <root level="INFO">
     <appender-ref ref="std" />
     <!-- <appender-ref ref="root_async" /> -->
@@ -70,6 +78,9 @@ tags: Java
 ```
 
 ## logback.xsd
+这个不是官方推荐的，但是使用之后对于编辑logback.xml非常方便。  
+
+使用方法：放在logback.xml一起。
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">

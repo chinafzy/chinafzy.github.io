@@ -11,6 +11,8 @@ tags: Linux Tips
 $ echo "This is my data" > /dev/udp/127.0.0.1/3000
 ```
 
+## nload查看网络实时流量
+个人知道的感觉最好的
 
 ## zmore
 ```bash
