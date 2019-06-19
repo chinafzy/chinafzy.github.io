@@ -42,6 +42,11 @@ layout: default
             </nav>
           </aside>
         {% endif %}
+        
+        {% if page.is_tip %}
+        Tips是平时随手乱记下的，的确很实用，但是也特别杂乱。有些东西是小技巧，有些知识点扩展开可能写许多。如果有疑问，直接找我。
+        {% endif %}
+        
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>

@@ -3,6 +3,7 @@ title:  "Linux Tips"
 date:   2018-12-19 07:08:11 +0800
 categories: linux tips
 tags: Linux Tips
+is_tip: true
 ---
 
 
@@ -69,7 +70,7 @@ tar --extract --file={tarball.tar} {file}
 
 ## check swap memory
 ```bash
-$ awk '/VmSwap|Name/{printf $2 " " $3}END{ print   “" }'  /proc/[pid]/status
+$ awk '/VmSwap|Name/{printf $2 " " $3}END{ print  "" }'  /proc/[pid]/status
 ```
 ```bash
 for file in /proc/*/status ; do
@@ -97,6 +98,7 @@ $ service ssh restart
 
 
 ## prevent ssh from disconnecting
+`~/.ssh/config`
 
 ```vim
 Host *

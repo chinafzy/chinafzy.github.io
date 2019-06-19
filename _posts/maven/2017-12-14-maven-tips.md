@@ -1,8 +1,9 @@
 ---
 title:  "Maven Tips"
 date:   2018-12-19 07:08:11 +0800
-categories: maven tips
+categories: maven
 tags: Maven Tips
+is_tip: true
 ---
 
 ## os-maven-plugin
@@ -14,9 +15,7 @@ eclipse项目在引入时候，可能会报错，解决办法是将其作为ecli
 os-maven-plugin is a Maven extension, a Maven plugin, and an Eclipse plugin  
 os-maven-plugin 是一个Maven扩展，一个Maven的插件，还是一个Eclipse插件
 
-
-## archetype 方式建立Maven新项目 
-
+## archetype 
 ```bash
 mvn archetype:generate \
   -DinteractiveMode=false \
@@ -29,8 +28,7 @@ mvn archetype:generate \
 ```
 
 
-## 本地 archetype-catalog
-archetype是Maven下面非常有用的
+## 拷贝本地 archetype-catalog
 ```
 curl http://47.99.116.48:8081/repository/maven-public/archetype-catalog.xml >  ~/.m2/repository/archetype-catalog.xml
 ```
@@ -39,16 +37,15 @@ curl http://47.99.116.48:8081/repository/maven-public/archetype-catalog.xml >  ~
 
 1. 拷贝依赖jar包到`target/dependency`目录下
 ```bash
-mvn dependency:copy-depedencies
+mvn dependency:copy-dependencies
 ```
 
-1. 在`target`目录下运行命令
+2. 运行命令
 ```bash
-java -cp classes/$(ls dependency/*.jar | awk '{printf ":"$0}') io.netty.example.proxy.HexDumpProxy
+java -cp target/classes/$(ls target/dependency/*.jar | awk '{printf ":"$0}') io.netty.example.proxy.HexDumpProxy
 ```
 
-## 给Maven下的test设置参数
-如果项目中的test代码需要特殊设置（比如，内存），可以在pom.xml下设置。
+## pom.xml中设置test默认参数 
 ```xml
 <build>
   <plugins>
@@ -67,6 +64,21 @@ java -cp classes/$(ls dependency/*.jar | awk '{printf ":"$0}') io.netty.example.
 </build>
 ```
 
+## 运行Maven项目，可以被eclipse远程调试
+1. 首先运行这个命令
+```bash
+mvn -Dmaven.surefire.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE" test -Dtest=TestCase
+```
+如下面显示，Maven会开启debug模式，监听在8000端口
+```bash
+Listening for transport dt_socket at address: 8000
+```
+
+2. 在eclipse中，
+  + 选择菜单 `Run` -> `Debug Configurations`
+  + 弹出菜单里，选择`Remote Java Application`
+  + 添加一个调试条目。注意填写端口号和ip地址，以及选择正确的项目（跟远程程序一致）
+  + 点击`Debug`按钮，开始debug。Eclipse将连接远程地址，成功后远程debug程序继续执行。
 
 
 ## Plugin execution not covered by lifecycle configuration: org.codehaus.gmaven:groovy-maven-plugin:2.0:execute in eclipse

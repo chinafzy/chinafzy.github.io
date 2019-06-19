@@ -7,12 +7,15 @@ tags: Redis Tips
 
 ## Redis的推荐配置
 
+### max-memory
+上线的服务器第一个要设置的参数，否则可能会因为内存过大，被Linux Kill了。
+
 ### tcp-keepalive 
 这个参数是性能的关键，在早期版本中，参数是默认关闭的。
 设置为180是比较合理的。
 
 ### timeout
-
+设置为0比较靠谱
 
 
 ## url for jedis config
@@ -30,8 +33,9 @@ EVAL "local ks,ret = redis.call('keys', ARGV[1]), 0; for k,v in ipairs(ks) do re
 
 ## clear the keys
 ```
-EVAL "local ks,ret = redis.call('keys', ARGV[1]), 0; for k,v in ipairs(ks) do redis.call('del', v); ret = ret + 1; end; return ret " 0  k*
+EVAL "local ks = redis.call('keys', ARGV[1]); local ret, max = 0, tonumber(ARGV[2] or 100000); for k,v in ipairs(ks) do redis.call('del', v); ret = ret + 1; if ret >= max then break; end; end; return ret " 0  k* 
 ```
+
 
 ## find big keys
 ```bash
