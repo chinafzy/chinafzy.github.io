@@ -3,7 +3,7 @@ title: "Redis Server的连接不能释放(connection leak)"
 categories: redis
 tags: Redis
 ---
-**这个问题在kafka server的早期版本(0.9)中也存在**
+**这个问题在kafka server的早期版本(0.9)中也存在 [Enable keepalive socket option for broker to prevent socket leak](https://issues.apache.org/jira/browse/KAFKA-2096){:target="_blank"}**
 
 ## 问题描述
 线上系统发现Redis无法连接，查看`info clients`后发现Redis Server上的连接数已经上万。  

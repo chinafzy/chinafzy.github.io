@@ -6,6 +6,9 @@ tags: Linux Tips
 is_tip: true
 ---
 
+## 查看命令启动位置
++ `lsof -p <pid> | head ` 部分时候有用
++ java的可以用`jinfo <pid>`
 
 ## send udp packet
 ```bash

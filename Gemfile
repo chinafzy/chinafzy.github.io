@@ -1,6 +1,8 @@
 source "https://gems.ruby-china.com/"
+# gem sources -r $(gem sources | tail -1); gem sources -a https://gems.ruby-china.com/
 
-gem "jekyll", "~> 3.5"
+gem "jekyll", "~> 3.8"
+# gem "minima", "~> 2.5"
 gem "minimal-mistakes-jekyll"
 # gem "sassc"
 # gem 'jekyll-target-blank'

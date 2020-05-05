@@ -7,11 +7,11 @@ tags: Java Pattern
 ## 从JDK的一个经典bug说起继承(inherit)的不足
 
 JDK实现了观察者设计模式，
-+ `java.util.Observable`：可被观察的对象，主要函数
-  + #addObserver()/deleteObserver()：增删观察者
-  + #notifyObservers()：通知观察者数据变动
-+ `java.util.Observer`：观察调用的callback，函数
-  + #update(Observable observable, Object obj)
++ `java.util.Observable`：可被观察的对象，主要函数：
+  + addObserver()/deleteObserver()：增删观察者
+  + notifyObservers()：通知观察者数据变动
++ `java.util.Observer`：观察调用的callback，函数：
+  + update(Observable observable, Object obj)
 
 假设我要做一个UI类，在内部资源内容发生变动时候，需要`通知`别的模块，观察者模式是最好的选择。  
 我们期望的代码是这样的：
