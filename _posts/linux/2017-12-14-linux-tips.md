@@ -20,7 +20,7 @@ $ echo "This is my data" > /dev/udp/127.0.0.1/3000
 
 ## zmore
 ```bash
-$ zmore nginx1.20171224.gz | awk -F ' [|]# ' '{if ($3 >=; "2017-12-22 09:00:00" ) exit; if ($3 >= "2017-12-22 09:00:00") print $0;}' | more
+$ zmore nginx1.20171224.gz | awk -F ' [|]# ' '{if ($3 >= "2017-12-22 09:00:00" ) exit; if ($3 >= "2017-12-22 09:00:00") print $0;}' | more
 ```
 
 
